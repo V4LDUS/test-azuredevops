@@ -10,8 +10,7 @@ variables:
 #- template: folder2/release.yml
 - group: 'A variable group'
 
-pool:
-  vmImage: ubuntu-latest
+pool: server
 
 steps:
 #- script: echo ${{ variables.releaseNo }}
