@@ -7,13 +7,24 @@ trigger:
 - main
 
 variables:
-- template: folder2/release.yml
+#- template: folder2/release.yml
 - group: 'A variable group'
-- name: FromBuild
-  value: 'modified'
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo ${{ variables.releaseNo }}
+#- script: echo ${{ variables.releaseNo }}
+
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    method: 'PUT'
+    body: |
+      "variables": {
+          "FromBuild": {
+              "isSecret":false, "value": "I DID IT!"
+          }
+      }
+    urlSuffix: 'https://dev.azure.com/iKabbash/_apis/distributedtask/variablegroups/1?api-version=7.0'
+    waitForCompletion: 'false'
