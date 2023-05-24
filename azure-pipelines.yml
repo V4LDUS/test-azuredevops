@@ -7,7 +7,7 @@ trigger:
 - main
 
 variables:
-- template: release.yml
+- template: folder2/release.yml
 
 pool:
   vmImage: ubuntu-latest
